@@ -38,7 +38,11 @@ I2C o IIC (Circuito Inter-Integrado) es un protocolo de comunicaion el cual su p
 
 Sabiendo la teoria del protocolo I2C estos serian los pasos para configurarla en la Raspberry PI, teniendo en cuenta que tenemos una raspberry iniciada desde cero:
 ·Lo primero seria activar los puertos I2C de la raspberry, para esto usamos el comando *sudo raspi-config* en el terminal. Despues bajamos hasta *Interface Options*, aqui seleccionamos *I2c* y le damos a *Yes* tras esto reiniciamos la raspberry.
-·Una vez teniendo la interfaz I2C activada tenemos que instalar un par de utilidades de la raspberry, para eso 
+·Una vez teniendo la interfaz I2C activada tenemos que instalar un par de utilidades de la raspberry, para eso insertamos en el terminal los siguientes dos comandos:
+  *sudo apt-get install -y python-smbus*
+  *sudo apt-get install -y i2c-tools*
+  Reiniciamos el sistema con *sudo reboot*
+·Ahora tenemos que conectar el conversor ADS1115 a la raspberry siguiendo el siguiente esquema:
 
 
 
