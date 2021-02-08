@@ -81,7 +81,32 @@ Sabiendo la teoria del protocolo I2C estos serian los pasos para configurarla en
   
  ### Processing
  
+ Para instalar Processing en nuestro sistema Raspberry primero de todo tenemos que saber cual es la ultima version disponible, en nuestro caso la 3.5.3. Sabiendo esto, ejecutamos los siguientes comandos en el terminal de la raspberry.
+ ```
+ cd ~
+wget http://download.processing.org/processing-3.5.3-linux-armv6hf.tgz
+ ```
  
+Una vez instalado lo extraemos:
+```
+tar xvfz processing-3.0.1-linux-armv6hf.tgz
+```
+
+Para iniciar un sketch de Processing ejecutamos los siguientes comandos:
+
+```
+cd ~/processing-3.0.1/
+./processing
+```
+
+Ahora para configurar nuestro conversor ADS1115 añadimos la libreria Hardware I/O, con esto tendriamos a nuestra disposicion en ```Ejemplos -> Librerias Principales -> Hardware I/O -> AnalogDigital_I2C_ADS1115```
+
+Con este programa somos capaces de confiurar nuestro conversor, a continuacion voy a mostrar el codigo completo pero solo explicare lo que hay que modificar: 
+
+```
+
+```
+
   
 
 
