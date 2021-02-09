@@ -66,6 +66,10 @@ C4: condensador de 5uF polarizado que filtra la señal para obtener el menor tip
 
 U1:A: es el chip 5532, es un chip amplificador dual de bajo ruido especial para sonido, que amplificara nuestra señal.
 
+## Step UP
+
+El step up es un convertidor DC DC que gracias a su circuito podemos aumentar el voltaje de la salida del Step UP consiguiendo asi que los 5 voltios que tenemos de la raspberry se combiertan en los 30 voltios que necesitamos
+
 ## Rasperry PI y Display
 
 Lo primero de todo es conectar la pantalla a la raspberry, es un proceso simple ya que se requieren tres cables. Gracias a la fuente de alimentacion que viene con la pantalla y el cable USB la raspberry se alimenta directamente con la pantalla. A demas de esto solo requerimos un cable HDMI y la fuente de alimentacion de 12V de la pantalla  todo lo demas serian perfiericos necesarios para la programacion de la raspberry, como un teclado, el SUB del apartado tactil de la pantalla,   raton y cable ethernet.
