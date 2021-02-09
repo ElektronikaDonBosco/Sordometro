@@ -44,19 +44,27 @@ J3: es la entrada del microfono, va conectado junto al chip 5532 para la amplifi
 
 J4: son pines para la colocacion del convertidor analogico digital ADS1115,el pin 1 y 2 son entradas de V y GND, los pines 3 y 4 son para el SCL(Sereial clock)y el SDA(Serial Data).
 
-J5: estos pines son la entrada de 5v+ que necesita el chip ADS1115 para su funcionamiento, si no no llegara a convertir la señal que tenemos, estos 5 voltios tambien provienen de la raspberry pi
+J5: estos pines son la entrada de 5v+ que necesita el chip ADS1115 para su funcionamiento, si no no llegara a convertir la señal que tenemos, estos 5 voltios tambien provienen de la raspberry pi.
 
-R1 y R2: son el divisor de tensiones que alimenta el microfono, las dos resistencias son de 5k1 ohms para que tenga una alimentacion constante
+R1 y R2: son el divisor de tensiones que alimenta el microfono, las dos resistencias son de 5k1 ohms para que tenga una alimentacion constante.
 
-R3: es el potenciometro que regula la ganancia de nuestro microfono
+R3: es el potenciometro que regula la ganancia de nuestro microfono.
 
-R4: es una resistencia de 4k3 ohms puesta en la entrada negativa para equilibrar la entrada 
+R4: es una resistencia de 4k3 ohms puesta en la entrada negativa para equilibrar la entrada.
 
-R5 y R6: resistencias de carga, solo montarlas en caso de querer inspeccionar la ganancia de salida
+R5 y R6: resistencias de carga, solo montarlas en caso de querer inspeccionar la ganancia de salida.
 
-R7 y R8: divisor de tensiones que va hacia el A0 que es la entrada analogica ya para convertirlo en analogico
+R7 y R8: divisor de tensiones que va hacia el A0 que es la entrada analogica ya para convertirlo en analogico.
 
-C1:
+C1: condensador de 100uF polarizado, necesario para que el microfono electrec funcione.
+
+C2: condensador de 82pF no polarizado , para controlar la ganancia junto al potenciometro (R3).
+
+C3: condensador de 2uF polarizado , para controlar junto a la resistencia R4 la entrada negativa.
+
+C4: condensador de 5uF polarizado que filtra la señal para obtener el menor tipo de ruido posible despues de amplificar.
+
+U1:A: es el chip 5532, es un chip amplificador dual de bajo ruido especial para sonido, que amplificara nuestra señal.
 
 ## Rasperry PI y Display
 
