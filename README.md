@@ -37,8 +37,11 @@ Uno de los mayores problemas que tenimos era la alimentacion para sacar los 30v+
 ahora explicaremos cada elemento del esquema electrico.
 
 J1: es la salida SDA y SCl que van hacia la raspberry pi para la lectura y la interpretacion de la señal.
+
 J2: es la entrada de alimentacion 30V+ que alimenta todo el sistema electrico del microfono.
+
 J3: es la entrada del microfono, va conectado junto al chip 5532 para la amplificacion de la señal, tiene un divisor de tensiones para alimentarlo constantemente.
+
 J4: son pines para la colocacion del convertidor analogico digital ADS1115,el pin 1 y 2 son entradas de V y GND
 
 ## Rasperry PI y Display
