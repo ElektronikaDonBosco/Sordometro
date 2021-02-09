@@ -73,6 +73,10 @@ El step up es un convertidor DC DC que gracias a su circuito podemos aumentar el
 El step up que utilizaremos sera el XL16009, es el modelo mas novedoso en el mercado, tiene un amplitud de entrada de 3 a 30V y una salida de 5 a 35V
 
 <p align="center">
+  <img width="500" height="300" src="ImagenesReadME/step up xl6009 datasheet .jpg">
+</p>
+
+<p align="center">
   <img width="500" height="300" src="ImagenesReadME/step up xl6009.jpg">
 </p>
 
