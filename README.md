@@ -28,6 +28,10 @@ Finalmente teniendo claros todos los componentes del sistema, el ultimo paso ser
 Para obtner una buena lectura de datos decidimos hacer nuestra propio microfono electrec con su propia alimentacion a 30V+ para obtener asi el mayor amplitud de onda posible.
 Uno de los mayores problemas que tenimos era la alimentacion para sacar los 30v+ de la propia alimentacion de la raspberry pi 4, por lo tanto optamos por poner un step up con una entrada de 5v+ continua proveniente de la raspberry para obtener la salida de 30v+ para nuestra alimentacion del sistema del microfono. La placa consta de unas resistencias en formato smd, concensadores polarizados y no polarizados,un potenciometro para aumentar o disminuir la ganancia, un chip5532, las entradas y salidas de la propia placa y el montaje de la placa que pasa la señal analogica a digital llamada ADS115
 
+<p align="center">
+  <img width="500" height="300" src="ImagenesReadME/esquema electrico.PNG">
+</p>
+
 
 ## Rasperry PI y Display
 
