@@ -31,6 +31,7 @@ Uno de los mayores problemas que tenimos era la alimentacion para sacar los 30v+
 <p align="center">
   <img width="500" height="300" src="ImagenesReadME/esquema electrico.PNG">
 </p>
+*Si quiere ver la imagen ampliada haga clic en la imagen para verla a mayor resolucion*
 
 
 ## Rasperry PI y Display
