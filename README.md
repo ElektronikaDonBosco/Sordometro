@@ -42,7 +42,21 @@ J2: es la entrada de alimentacion 30V+ que alimenta todo el sistema electrico de
 
 J3: es la entrada del microfono, va conectado junto al chip 5532 para la amplificacion de la señal, tiene un divisor de tensiones para alimentarlo constantemente.
 
-J4: son pines para la colocacion del convertidor analogico digital ADS1115,el pin 1 y 2 son entradas de V y GND
+J4: son pines para la colocacion del convertidor analogico digital ADS1115,el pin 1 y 2 son entradas de V y GND, los pines 3 y 4 son para el SCL(Sereial clock)y el SDA(Serial Data).
+
+J5: estos pines son la entrada de 5v+ que necesita el chip ADS1115 para su funcionamiento, si no no llegara a convertir la señal que tenemos, estos 5 voltios tambien provienen de la raspberry pi
+
+R1 y R2: son el divisor de tensiones que alimenta el microfono, las dos resistencias son de 5k1 ohms para que tenga una alimentacion constante
+
+R3: es el potenciometro que regula la ganancia de nuestro microfono
+
+R4: es una resistencia de 4k3 ohms puesta en la entrada negativa para equilibrar la entrada 
+
+R5 y R6: resistencias de carga, solo montarlas en caso de querer inspeccionar la ganancia de salida
+
+R7 y R8: divisor de tensiones que va hacia el A0 que es la entrada analogica ya para convertirlo en analogico
+
+C1:
 
 ## Rasperry PI y Display
 
