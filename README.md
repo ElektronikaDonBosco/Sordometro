@@ -68,7 +68,17 @@ U1:A: es el chip 5532, es un chip amplificador dual de bajo ruido especial para 
 
 ## Step UP
 
-El step up es un convertidor DC DC que gracias a su circuito podemos aumentar el voltaje de la salida del Step UP consiguiendo asi que los 5 voltios que tenemos de la raspberry se combiertan en los 30 voltios que necesitamos
+El step up es un convertidor DC DC que gracias a su circuito podemos aumentar el voltaje de la salida del Step UP consiguiendo asi que los 5 voltios que tenemos de la raspberry se combiertan en los 30 voltios que necesitamos.
+
+El step up que utilizaremos sera el XL16009, es el modelo mas novedoso en el mercado, tiene un amplitud de entrada de 3 a 30V y una salida de 5 a 35V
+
+<p align="center">
+  <img width="500" height="300" src="ImagenesReadME/step up xl6009.jpg">
+</p>
+
+*si quieres ver la imagen en un mejor resolucion haz click en la imagen*
+
+como se puede ver en la parte de la izquierda esta la entrada de señal y a la derecha esta la salida de la señal ya aumentada
 
 ## Rasperry PI y Display
 
