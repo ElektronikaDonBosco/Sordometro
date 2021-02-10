@@ -247,16 +247,16 @@ void draw() {
 Este programa esta preparado para leer n potenciometro, lo importante aqui seria determinar el intervalo de lectura que se hace cambiando el nombre del intervalo en la funcion ```   adc.analogReference(ADS1X15.INTERNAL_4V096); ```. A demas de esto la funcion mas importante y la que vamos a utilizar mas tarde en nuestro proyecto es la siguiente ``` float measured = adc.analogRead(0); ```.
 
 ### Programacion del Sordometro
-```
-/*
-esta es la version final del programa.
-Puede variar el valor de las variables de N_muestras segun la velocidad del dispositivo.
+
+
+Esta es la version final del programa.
+Puede variar el valor de la variable N_muestras segun la capacidad del dispositivo.
 Pueve variar el valor de V2 para calibracion de los decivelios captados
-*/
 
 
 
 
+```
 import processing.io.*;//importa biblioteca de prcessing en el programa
 ADS1115 adc;//crea variable abc de la familia de la biblioteca
 //variables de array Muestro_de_V1
