@@ -485,17 +485,27 @@ void colores() { //funciones de color diferentes para cadada peligrosidad, los m
 
 | Componente | Cantidad | Precio |
 | ------------- | ------------- | ------------- |
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  | 
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  | 
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  | 
-| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
+| Raspberry PI Model 4 8gb  | 1  | 9,87 €€  | 
+| MissBirdler Step-up Boost XL6009 | 1  | 85,95€  | 
+| resistencia smd 5k x3  | 1  | 0,05€  |
+|  resistencia smd 4k  |  1 |  0,05€ |
+| resistencia smd 12k  |  1 |  0,05€ |
+|  condensador 100uf | 1  |  0,23€ |
+|  condensador 2uf |  1 | 0,18€  |
+| condensador 5uf  |  1 |  0,18€ |
+| chip 5532  |  1 |  0,88€ |
+| ads 1115  |  1 | 17,59€  | 
+|  microfono electret |  1 | 0,63€| 
+|  Micro SD NETAC 64gb | 1  | 11,99 € |
+| Display SunFounder 10.1'' | 1  | 149 € |
+|  Total| --- | 276,66 € |
+
+
+### Agradecimientos
+
+Este ha sido un proyecto muy bonito, dificil pero eso lo ha hecho entretenido. Damos gracias a nuestro tutor Xabier Izquierdo, al resto de profesores que forman parte de Mantenimiento electronico de Don Bosco y a Don Bosco como tal por proveernos con los medios necesarios para llevar el proyecto a cabo.
+
+
 
 
 
