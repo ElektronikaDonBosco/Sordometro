@@ -247,8 +247,239 @@ void draw() {
 Este programa esta preparado para leer n potenciometro, lo importante aqui seria determinar el intervalo de lectura que se hace cambiando el nombre del intervalo en la funcion ```   adc.analogReference(ADS1X15.INTERNAL_4V096); ```. A demas de esto la funcion mas importante y la que vamos a utilizar mas tarde en nuestro proyecto es la siguiente ``` float measured = adc.analogRead(0); ```.
 
 ### Programacion del Sordometro
+´´´
+/*
+esta es la version final del programa.
+Puede variar el valor de las variables de N_muestras segun la velocidad del dispositivo.
+Pueve variar el valor de V2 para calibracion de los decivelios captados
+*/
 
 
+
+
+import processing.io.*;//importa biblioteca de prcessing en el programa
+ADS1115 adc;//crea variable abc de la familia de la biblioteca
+//variables de array Muestro_de_V1
+float i=0;
+int N_muestras=500;
+int turn=0;
+int muestra=0;
+float[] array_muestras=new float [N_muestras] ;//array es un conglomerado de variables
+float V1=0;//valor medio de la señal de entrada
+//variable actualizable de señal de entrada
+float measured=0;
+//variables para calculo de DB (pot)
+float suma=0;
+//V1 se encuentra en variables de array Muestre_de_v1
+float V2=7;
+float pot=0;
+//variables de interfaz
+PFont tex;
+float H=0;
+int hora1=0;
+int min1=0;
+int hora2=0;
+int min2=0;
+float red1=0;
+float green1=255;
+float red2 =255;
+float green2 =0;
+float minutosreales;
+float uno=0.7937;
+float mi =second()+(minute()*60)+(hour()*3600);
+float si=0;
+float porciento=1;
+int escaneo=0;
+//var de acumulador
+float TiempoR;
+long s=millis();
+float T=1;
+float porcentagerestante=1;
+float r=1;
+//control de tiempointervalo
+void setup() {
+  fullScreen();//pantalla completa
+  //size(1280, 800);
+  colorMode(RGB, 100);//funcion de color en rgb para facilitar los calculos
+  printArray(PFont.list());//añadir lista de fuentes
+  tex= createFont("Cambria-Bold-48.vlw", 48);//escoger fuente
+  textFont(tex);// utilizar fuente escogida en siguientes textos
+
+  //revovinado de medias a 110 para poder hacer los calculos del principio
+
+  for (int revovina=N_muestras; revovina<=1; revovina--) {
+    array_muestras[revovina]=110;
+    revovina--;
+  }
+
+
+
+  adc = new ADS1115("i2c-1", 0x48);
+
+  // this sets the measuring range to +/- 4.096 Volts
+  // other ranges supported by this chip:
+  // INTERNAL_6V144, INTERNAL_2V048, INTERNAL_1V024,
+  // INTERNAL_0V512, INTERNAL_0V256
+  adc.analogReference(ADS1X15.INTERNAL_6V144);
+
+  // Important: do not attempt to measure voltages higher than
+  // the supply voltage (VCC) + 0.3V, meaning that 3.6V is the
+  // absolut maximum voltage on the Raspberry Pi. This is
+  // irrespective of the analogReference() setting above.
+}
+
+void draw() {
+
+  measured = adc.analogRead(0);
+  s=millis();
+  //recoge medidas para utilizar mas adelante
+  Muestreo_de_V1();
+  //superpone las partes estaticas del fondo para crear la estetica deseada
+  fondo_estatico();
+  //combersor de DBSPL (DBA) en tiempo
+  curvasimple();
+  //combertidor del tiempo directo restante y mostrarlo apropiadamente
+  exposicionrestante();
+  //acumulador sonoro para exposicion sertante en jornada
+  acumulador();
+  //combertidor del tiempo acumulado restante y mostrarlo apropiadamente
+  mostraracumulador();
+  //muestra la peligrosidad en tonos de color de verde a rojo tiñiendo los numeros
+  colores();
+}
+void Muestreo_de_V1() {
+  if (measured<0) {//si la varible de entradad de datos es negativa rectificalo a positivo
+    measured=-measured;
+  }
+  if (turn<N_muestras) {//cargame el nuevo valor en el array
+    array_muestras[turn]=measured;
+    for (int w=0; w<N_muestras; w++) {//empieza el calculo de la media geometrica del array
+      i+=pow(array_muestras[w], 2);
+    }
+    V1=sqrt(i/N_muestras);
+    i=0;
+    pot= 20*(log(V1/V2));
+
+    turn=turn+1;//termina el calculo de la media geometrica
+  }
+  if (turn>=N_muestras) {
+    turn=0;
+  }
+}
+
+
+void exposicionrestante() {
+  int db=round(pot);//redondea lossin decimales decibelios para poder displayarlo 
+  textSize(100);//tamaño de texto
+  fill(red1, green1, 0);//color controlado con la funcion de color
+  text("DB=  "+db, 180, 255);
+  //empieza a mostrar las variables de tiempo de manera exadecimal
+  if (H<=1) {//limite inferior a 0
+    fill(red1, green1, 0);
+    textSize(50);
+    minutosreales=H*60;
+    min1=round(minutosreales);
+    text(min1+"min", 970, 235);
+    hora1=0;
+    text(hora1+"H", 880, 235);
+  }
+  if ((H>1)&&(H<48)) {//rango funcional entr 1 segundo y 48
+    hora1=round(H-0.5);
+    fill(red1, green1, 0);
+    textSize(50);
+    text(hora1+"H", 880, 235);
+    minutosreales=(H*60)-(hora1*60);
+    min1=round(minutosreales);
+    text(min1+"min", 970, 235);
+  }
+  if (H>48) {//limite superior 
+    fill(red1, green1, 0);
+    textSize(50);
+    text("SIN RIESGO", 845, 235);
+  }
+}
+void fondo_estatico() {
+  background(0, 0, 0);
+  //rectangolo arriba1
+  strokeWeight(5);
+  fill(0, 0, 30);
+  stroke(80, 80, 100);
+  rect(130, 100, 650, 230, 17);
+  //rectangolo arriba2
+  strokeWeight(5);
+  fill(0, 0, 30);
+  stroke(80, 80, 100);
+  rect(830, 100, 320, 230, 17);
+  //rectangulo abajo
+  strokeWeight(5);
+  fill(0, 0, 30);
+  stroke(80, 80, 100);
+  rect(130, 430, 1015, 230, 17);
+  //Descripciones
+  textSize(30);
+  fill(80, 80, 100);
+  text("SONÓMETRO", 365, 380);
+  textSize(18);
+  text("TIEMPO DE EXPOSICION", 895, 370);
+  text("DIARIA MAXIMA", 925, 400);
+  textSize(30);
+  text("DOSIMETRO SONORO:", 180, 710);
+  textSize(18);
+  text("TIEMPO DE EXPOSICION RESTANTE PARA LA PERDIDA DE AUDICION", 520, 708);
+}
+void curvasimple() {//curca de combersion de DBSPL a TIEMPO
+  float uno=0.7937;
+  uno=pow(0.7937, pot);
+  H=(2705659839.93267* uno);
+  r=H*3600;
+}
+void acumulador() {
+  /*
+  acumula el tiempo de exposicion restante en relacion al tiempo de exposicion adquirido
+Cada retardo X de tiempo actualiza el valor del porcentage que tiene que mostrar en pantaya
+*/
+  if (si<s-900) {
+    if (T>0) {//limite de 0 minutos, no puede quedar nenos tiempo que 0
+      println(T);
+      T=1/(r);
+      porcentagerestante-=T;
+    }
+    si=s; //actualiza el tiempo para que el retardo se repita en cada ejecucion
+  }
+  
+}
+void mostraracumulador() {// calculo para mostrar el tiempo restante de exposicion diaria
+  TiempoR=(r*porcentagerestante);
+  fill(red2, green2, 0);
+  textSize(130);
+  if (TiempoR<=0) {//limite de 0
+    hora2=0;
+    text(0+"H", 390, 590);
+    min2=0;
+    text(0+"min", 620, 590);
+  }
+  if ((TiempoR>0)&&(TiempoR<356400)) {//rango operativo
+    hora2=round((TiempoR/3600)-0.5);
+    text(hora2+"H", 370, 590);
+    min2=round(TiempoR/60);
+    text((min2-(hora2*60))+"min", 620, 590);
+  }
+
+  if (TiempoR>356400) {//limite superior
+    hora2=99;
+    text(99+"H", 370, 590);
+    min2=59;
+    text(59+"min", 620, 590);
+  }
+}
+void colores() { //funciones de color diferentes para cadada peligrosidad, los marcadores de tiempo
+  red1=255-(H*15);
+  green1=(H*15);
+  red2=255-((TiempoR/3600)*15);
+  green2=((TiempoR/3600)*15);
+}
+
+´´´
 
 ### Componentes y Precio
 
