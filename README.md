@@ -135,7 +135,7 @@ Sabiendo la teoria del protocolo I2C estos serian los pasos para configurarla en
   Aqui se pueden onbservar todas las direcciones posibles del protocolo I2C que puede leer la raspberry, el numero 48 que se puede apreciar representa correctamente a nuestro conversor ADS1115.
   
   
- ### Processing
+ ### Preparacion Processing
  
  Para instalar Processing en nuestro sistema Raspberry primero de todo tenemos que saber cual es la ultima version disponible, en nuestro caso la 3.5.3. Sabiendo esto, ejecutamos los siguientes comandos en el terminal de la raspberry.
  ```
@@ -202,7 +202,56 @@ Con este programa somos capaces de confiurar nuestro conversor, a continuacion v
   Aqui lo unico que tenemos que modificar serian los valores del config, de esta manera podemos modificar los primeros bits que son los de confiuracion fijandonos en el datasheet: https://www.ti.com/lit/ds/symlink/ads1115.pdf?ts=1612940066789&ref_url=https%253A%252F%252Fwww.google.com%252F. Lo otro que es necesario cambiar es la ultima linea, aqui se especifica como tienen que ser leidos los bits. En nuestro caso queremos leer dos bytes, para esto lo especificamos poniendo un dos dentro del read en la siguiente linea: ```byte[] in = read(2);```. Como los bytes entran a la par a la hora de leerlos, hay que mover el primer byte 8 bits para la izquierda para que asi se convierta en un dato de 16 bits, esto lo hacemos en la ultima linea del codigo: ``` return (in[0] << 8) | in[1]; ```.
   
   
-  Este seria la segunda parte del programa donde 
+  Este seria la segunda parte del programa donde se llama a la lectura de los datos, aqui hay que fijarse en la creacion del objeto, por defecto est el ADS1015, este es otro chip compatible con el programa. Tenemos que deseleccionar esa creaccion de objeto y seleccionar la del ADS1115 que ya esta escrito. A demas en la misma llamada al objeto se puede cambiar la direccion, por defecto esta la de 0x48 que seria la que tambien viene por defecto en el conversor:
+  
+  ```
+  //ADS1015 adc;
+// or, alternatively:
+ADS1115 adc;
+
+// see setup.png in the sketch folder for wiring details
+
+void setup() {
+  //printArray(I2C.list());
+
+  //adc = new ADS1015("i2c-1", 0x48);
+  adc = new ADS1115("i2c-1", 0x48);
+
+  // this sets the measuring range to +/- 4.096 Volts
+  // other ranges supported by this chip:
+  // INTERNAL_6V144, INTERNAL_2V048, INTERNAL_1V024,
+  // INTERNAL_0V512, INTERNAL_0V256
+  adc.analogReference(ADS1X15.INTERNAL_4V096);
+
+  // Important: do not attempt to measure voltages higher than
+  // the supply voltage (VCC) + 0.3V, meaning that 3.6V is the
+  // absolut maximum voltage on the Raspberry Pi. This is
+  // irrespective of the analogReference() setting above.
+}
+
+void draw() {
+  // this will return a number between 0 and 1
+  // (as long as your voltage is positive)
+  float measured = adc.analogRead(0);
+
+  // multiply with the selected range to get the absolut voltage
+  float volts = measured * 4.096;
+  println("Analog Input 0 is " + volts + "V");
+
+  background(255);
+  fill(measured * 255);
+  ellipse(width/2, height/2, width * 0.75, width * 0.75);
+}
+  ```
+
+Este programa esta preparado para leer n potenciometro, lo importante aqui seria determinar el intervalo de lectura que se hace cambiando el nombre del intervalo en la funcion ```   adc.analogReference(ADS1X15.INTERNAL_4V096); ```. A demas de esto la funcion mas importante y la que vamos a utilizar mas tarde en nuestro proyecto es la siguiente ``` float measured = adc.analogRead(0); ```.
+
+### Programacion del Sordometro
+
+
+
+### Componentes y Precio
+
 
 
 
