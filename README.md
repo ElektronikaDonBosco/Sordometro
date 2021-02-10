@@ -110,7 +110,7 @@ Sabiendo la teoria del protocolo I2C estos serian los pasos para configurarla en
 ·Ahora tenemos que conectar el conversor ADS1115 a la raspberry siguiendo el siguiente esquema:
 
 <p align="center">
-  <img width="445" height="463" src="Sonometro_MARK3/setup.png">
+  <img width="445" height="463" src="ImagenesReadME/setup.png">
 </p>
 
   EL conversor puede tener 4 direcciones distintas, podemos cambiar las direcciones conectando el puerto ADDR a los puertos del mismo conversor de GND, VDD, SCL o SDA. Estas       direcciones aparecerian en la raspberry con el siguiente nombre: 0x48, 0x49, 0x4B y 0x4A en su respetcivo orden, siendo 0x48 la direccion por defecto si no conectamos nada al   pin ADDR.
@@ -483,6 +483,19 @@ void colores() { //funciones de color diferentes para cadada peligrosidad, los m
 
 ### Componentes y Precio
 
+| Componente | Cantidad | Precio |
+| ------------- | ------------- | ------------- |
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  | 
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  | 
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  | 
+| Contenido de la celda  | Contenido de la celda  | Contenido de la celda  |
 
 
 
