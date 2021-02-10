@@ -161,10 +161,48 @@ Con este programa somos capaces de confiurar nuestro conversor, a continuacion v
 
 ```
 
+    if (channel != this.channel) {
+      int config = 0x0183;                    // start with the default value from datasheet
+      config &= ~0x100;                       // enable continuous readings
+      config |= (range << 9);                 // set selected range (gain)
+      config |= (1 << 14) | (channel << 12);  // set single-ended and channel
+      config |= (1 << 15);                    // start a single conversion
+      writeRegister(0x01, config);            // write to the configuration register at 0x01
+
+      // when the channel switched we need to wait for the upcoming
+      // conversion to finish
+      delay(conversionDelay);
+
+      // save the channel so that we don't need to do the same for
+      // subsequent reads from the same channel
+      this.channel = channel;
+    }
+
+    return readS16(0x00) >> bitShift;  // read from the conversion register at 0x00
+    // the ADS1015 will have its 12-bit result in the upper bits, shift those right by four
+  }
+
+  protected void writeRegister(int register, int value) {
+    beginTransmission(address);
+    write(register);
+    write(value >> 8);
+    write(value & 0xFF);
+    endTransmission();
+  }
+
+  protected int readS16(int register) {
+    beginTransmission(address);
+    write(register);
+    byte[] in = read(2);
+    return (in[0] << 8) | in[1];
+  }
+}
 ```
 
+  Aqui lo unico que tenemos que modificar serian los valores del config, de esta manera podemos modificar los primeros bits que son los de confiuracion fijandonos en el datasheet: https://www.ti.com/lit/ds/symlink/ads1115.pdf?ts=1612940066789&ref_url=https%253A%252F%252Fwww.google.com%252F. Lo otro que es necesario cambiar es la ultima linea, aqui se especifica como tienen que ser leidos los bits. En nuestro caso queremos leer dos bytes, para esto lo especificamos poniendo un dos dentro del read en la siguiente linea: ```byte[] in = read(2);```. Como los bytes entran a la par a la hora de leerlos, hay que mover el primer byte 8 bits para la izquierda para que asi se convierta en un dato de 16 bits, esto lo hacemos en la ultima linea del codigo: ``` return (in[0] << 8) | in[1]; ```.
   
-
+  
+  Este seria la segunda parte del programa donde 
 
 
 
